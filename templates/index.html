@@ -1,0 +1,53 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'book:index' %}">صفحه اصلی</a></li>
+            {% comment %} <li><a href="{% url 'book:delete' %}">حذف کتاب</a></li> {% endcomment %}
+            <li><a href="{% url 'book:add' %}">افزودن کتاب</a></li>
+        </ul>
+    </nav>
+    <div class="main-div">
+        <form method="GET" action="{% url 'book:search' %}" style="direction: rtl;">
+            {{ form.as_p }}
+            <button type="submit" value="search" id="button"> جستجو </button>
+           
+        </form>
+
+        <table>
+            <tr>
+                <th>عنوان کتاب</th>
+                <th>شابک کتاب</th>
+                <th>نویسنده کتاب</th>
+                <th>حذف</th>
+                <th>به روز رسانی</th>
+
+
+            </tr>
+            {% for item in list_of_book %}
+            <tr>
+                <td>{{ item.title }}</td>
+                <td>{{ item.isbn }}</td>
+                <td>{{ item.author }}</td>
+                <td><a id="delete-btn" href="{% url 'book:delete' item.isbn %}">حذف</a></td>
+                <td><a id="update-btn" href="{% url 'book:update' item.pk %}">به روز رسانی</a></td>
+
+            </tr>
+            {% endfor %}
+            
+        </table>
+    </div>
+    
+</body>
+</html>
+

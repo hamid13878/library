@@ -1,0 +1,31 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'book:index' %}">صفحه اصلی</a></li>
+            <li><a href="{% url 'book:add' %}">افزودن کتاب</a></li>
+        </ul>
+    </nav>
+    <div class="main-div">
+        <form method="POST" action="" style="direction: rtl;">
+        
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" id="button" value="update"> به روزرسانی </button>
+           
+        </form>
+    </div>
+    
+</body>
+</html>
+
